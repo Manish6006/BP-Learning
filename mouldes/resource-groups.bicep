@@ -11,7 +11,7 @@ param mylocation string
 //param subscriptions string
 targetScope='subscription'
 
-resource myRG 'Microsoft.Resources/resourceGroups@2024-07-01' = {
-  name: rgName
-  location: mylocation
+resource myRG 'Microsoft.Resources/resourceGroups@2024-07-01' ={
+  name:rgName
+  location:mylocation
 }
