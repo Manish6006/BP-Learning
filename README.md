@@ -38,3 +38,6 @@ If you encounter any problem, please open an issue at https://aka.ms/azclibug
 ## Useful command while deploying the bicep template
 
 `az deployment group create --resource-group <your-existing-resource-group-name> --template-file network-security-groups.bicep --parameters myNSGname='<enter-your-own-NSGname' location='<choose-your-region-to-deploy'`
+
+### Convert bicep template into json file 
+`az bicep build -f network-security-groups.bicep`
