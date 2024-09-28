@@ -35,3 +35,6 @@ If you encounter any problem, please open an issue at https://aka.ms/azclibug
 
 [Warning] The login output has been updated. Please be aware that it no longer displays the full list of available subscriptions by default.`
 
+## Useful command while deploying the bicep template
+
+`az deployment group create --resource-group <your-existing-resource-group-name> --template-file network-security-groups.bicep --parameters myNSGname='<enter-your-own-NSGname' location='<choose-your-region-to-deploy'`
