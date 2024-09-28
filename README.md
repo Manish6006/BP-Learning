@@ -1,4 +1,4 @@
-# To fetch any issue with az login then follow below few command to rectify the issue.
+# If you are facing any issue while trigging the az login command then follow below few command to rectify the issue.
 
 ## First close your existing open az cli or powershell or cloudshell or git cli
 
