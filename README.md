@@ -41,3 +41,9 @@ If you encounter any problem, please open an issue at https://aka.ms/azclibug
 
 ### Convert bicep template into json file 
 `az bicep build -f network-security-groups.bicep`
+
+### If you face below types of issue while creating the subnet
+
+{"code": "InvalidTemplate", "message": "Deployment template validation failed: 'The template resource 'zks-vnet-subnet-dev' for type 'Microsoft.Network/virtualNetworks/subnets' at line '21' and column '57' has incorrect segment lengths. A nested resource type must have identical number of segments as its resource name. A root resource type must have segment length one greater than its resource name. Please see https://aka.ms/arm-syntax-resources for usage details.'.", "additionalInfo": [{"type": "TemplateViolation", "info": {"lineNumber": 21, "linePosition": 57, "path": "properties.template.resources[0].type"}}]}
+
+Then kindly remember that virtual network resource should act as parent for subnet resource.
