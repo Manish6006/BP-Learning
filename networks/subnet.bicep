@@ -2,21 +2,46 @@
 Create subnet for existing vnet
 */
 
-@description('Enter thr subet name')
-param subnetName string
-
-@description('Enter existing Vnet name')
-param vnetName string
-
-resource vnet 'Microsoft.Network/virtualNetworks@2024-01-01' existing = {
-  name: vnetName
-}
+var variables= loadJsonContent('../json/parameters.json')
 
 resource subnet 'Microsoft.Network/virtualNetworks/subnets@2024-01-01' = {
   
-  name: subnetName
+  name: variables.subnetName
   parent:vnet
-  properties:{
-    addressPrefix: '10.0.1.0/24'
+  properties: {
+    addressPrefix:variables.addressPrefixSubnet
+    delegations: [
+      {
+        name: variables.subnetDelegations
+        properties:{
+          serviceName: 'Microsoft.ContainerInstance/containerGroups'
+        }
+      }
+    ]
+    networkSecurityGroup: {
+      id: nsg.id
+    }
+    routeTable:{
+      id:routeTable.id
+    }
+    applicationGatewayIPConfigurations: [{}]
+    defaultOutboundAccess: false
+    ipAllocations: [{}]
+    natGateway: {}
+    privateEndpointNetworkPolicies: 'Disabled'
+    privateLinkServiceNetworkPolicies: 'Disabled'
+    serviceEndpointPolicies: [{}]
+    serviceEndpoints: [{}]
   }
+}
+
+resource vnet 'Microsoft.Network/virtualNetworks@2024-01-01' existing = {
+  name: variables.vnetName
+}
+
+resource nsg 'Microsoft.Network/networkSecurityGroups@2024-01-01' existing = {
+  name: variables.subnetName
+}
+resource routeTable 'Microsoft.Network/routeTables@2024-01-01' existing = {
+  name: variables.vnetName
 }
